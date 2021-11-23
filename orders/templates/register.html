@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block Title %} Registrarse {% endblock %}
+{% block body %} 
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-10 col-xl-10 mx-auto">
+        <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+          <div class="card-img-left d-none d-md-flex">
+          </div>
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Registro de usuario</h5>
+            <form>
+
+              <!-- <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputName" placeholder="Tonny" required autofocus>
+                <label for="floatingInputUsername">Nombre</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInputSurname" placeholder="Montenegro" required>
+                <label for="floatingInputEmail">Apellido</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInputEmail" placeholder="Tonny@mail.com" required>
+                <label for="floatingInputEmail">Correo electronico</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="floatingInputNumber" placeholder="83854816" required>
+                <label for="floatingInputEmail">Numero</label>
+              </div>
+
+              <hr>
+
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Contraseña</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Confirm Password" required>
+                <label for="floatingPasswordConfirm">Confirmar Contraseña</label>
+              </div> -->
+
+              {% csrf_token %}
+              {{ form.as_p }}
+
+              <div class="d-grid mb-2">
+                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Registrarse</button>
+              </div>
+
+              <a class="d-block text-center mt-2 small" href="login">Ya tiene una cuenta? Iniciar sesion</a>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
