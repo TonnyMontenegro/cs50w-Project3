@@ -12,4 +12,6 @@ urlpatterns = [
     path('login', views.login_view, name="login"),
     path('home', views.menu_view, name="home"),
     path('logout', views.logout_user, name="logout"),
+    path('add/<str:categoria>/<int:uid>',views.add,name="add"),
+    # path('remove_from_cart/<int:categoria>/<int:uid>',views.remove_from_cart,name="remove_from_cart"),
 ]

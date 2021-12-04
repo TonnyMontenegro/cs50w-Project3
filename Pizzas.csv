@@ -1,0 +1,21 @@
+categoria,nombre,uid,precio,tamanio,toppingN,tipo
+14,Cheese,18,13.5,Pequenio,0,Regular
+14,1 topping,19,14.75,Pequenio,1,Regular
+14,2 toppings,20,15.95,Pequenio,2,Regular
+14,3 toppings,21,16.95,Pequenio,3,Regular
+14,Special,22,18.5,Pequenio,6,Regular
+14,Cheese,23,18.95,Grande,0,Regular
+14,1 topping,24,20.95,Grande,1,Regular
+14,2 toppings,25,22.95,Grande,2,Regular
+14,3 toppings,26,24.95,Grande,3,Regular
+14,Special,27,26.95,Grande,6,Regular
+14,Cheese,28,25.5,Pequenio,0,Sicilian
+14,1 item,29,27.5,Pequenio,1,Sicilian
+14,2 items,30,29.5,Pequenio,2,Sicilian
+14,3 items,31,31.5,Pequenio,3,Sicilian
+14,Special,32,33.5,Pequenio,6,Sicilian
+14,Cheese,33,39.95,Grande,0,Sicilian
+14,1 item,34,41.95,Grande,1,Sicilian
+14,2 items,35,43.95,Grande,2,Sicilian
+14,3 items,36,45.95,Grande,3,Sicilian
+14,Special,37,47.95,Grande,6,Sicilian

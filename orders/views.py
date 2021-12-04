@@ -3,12 +3,13 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
-from .models import Cuenta_func,sub,Extra,Ensalda,Elemento,Categoria,Pizza,Pasta,Topping,Pizza,Cena,Carrito,Orden,Factura
+from .models import *
 from django.http import HttpResponse,HttpResponseRedirect, request
 from .forms import UserRegisterForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
 from django.views.defaults import page_not_found
+from . import models
 
 # Create your views here.
 
@@ -23,8 +24,6 @@ if superuser.count() == 0:
     superuser.is_superuser = True
     superuser.is_staff = True
     superuser.save()
-    n_superuser=Factura(user=superuser,numero=Cuenta_func.cuenta_numero)
-    n_superuser.save()
 
 def index(request):
     if not request.user.is_authenticated:
@@ -48,7 +47,16 @@ def register_view(request):
 
 @login_required(login_url="login")
 def menu_view(request):
-    return render(request,'menu.html')
+    context = {
+        "RegularPizzas": Pizza.objects.filter(tipo='Regular'),
+        "SicilianPizzas": Pizza.objects.filter(tipo='Sicilian'),
+        "Ensaladas": Ensalda.objects.all,
+        "Toppings": Topping.objects.all,
+        "Subs": sub.objects.all,
+        "Pastas": Pasta.objects.all,
+        "Cenas": Cena.objects.all,
+    }
+    return render(request,'menu.html',context)
 
 @csrf_protect
 def login_view(request):
@@ -72,4 +80,24 @@ def logout_user(request):
     logout(request)
     return redirect('login')
 
+def add(request,categoria,uid):
+    context={
+        "toppings":Topping.objects.all()
+    }
+    if categoria == "Pizza":
+        elemento = models.Pizza.objects.get(uid=uid)
+        context['ToppingsN']= range(elemento.toppingN)
+    elif categoria == "Ensalada":
+        elemento = models.Ensalda.objects.get(uid=uid)
+    elif categoria == "Sub":
+        elemento = models.sub.objects.get(uid=uid)
+        context['extras']= Extra.objects.all()
+    elif categoria == "Pasta":
+        elemento = models.Pasta.objects.get(uid=uid)
+    elif categoria == "Cena":
+        elemento = models.Cena.objects.get(uid=uid)
 
+    context['elemento']=elemento
+    
+    print(elemento)
+    return render(request,"add.html",context)

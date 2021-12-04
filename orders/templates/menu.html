@@ -1,121 +1,162 @@
 {% extends "layout.html" %}
 {% block Title %} Iniciar sesion {% endblock %}
 {% block body %} 
-<div class="container Menu p-4 rounded shadow-lg">
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Regular_pizza">Pizza Regular</h3>
+{% load static %}
+<div class="container Menu rounded py-5 shadow-lg">
+
+
+  <div class="card translucid food">
+    <img src="/static/RegularPizza.webp" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/RegularPizza.webp" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Pizza Regular</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Tamaño</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for pizza in RegularPizzas %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ pizza.tipo }} {{ pizza.nombre }}</div>
+        <div class="col-2">{{ pizza.tamanio }}</div>
+        <div class="col-2 align-items-center">{{ pizza.precio }} $</div>
+        <div class="col-3"><a type="button" href="{% url 'add' pizza.categoria.nombre pizza.uid %}" class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Sicilian_pizza">Pizza Sicilian</h3>
+  <div class="card translucid food">
+    <img src="/static/SicilianPizza.jpg" id="Sicilian_pizza" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/SicilianPizza.jpg" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Pizza Sicilian</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Tamaño</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for pizza in SicilianPizzas %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ pizza.tipo }} {{ pizza.nombre }}</div>
+        <div class="col-2">{{ pizza.tamanio }}</div>
+        <div class="col-2 align-items-center">{{ pizza.precio }} $</div>
+        <div class="col-3"><a type="button"  href="{% url 'add' pizza.categoria.nombre pizza.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center"id="Toppings">Toppings</h3>
+  <div class="card translucid food">
+    <img src="/static/Toppings.jpg" id="Toppings" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/Toppings.jpg" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Toppings/extras</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
         </div>
+    {% for Topping in Toppings %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ Topping.nombre }}</div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Subs">Subs</h3>
+  <div class="card translucid food">
+    <img src="/static/Subs.jpg" id="Subs" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/Subs.jpg" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Subs</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Tamaño</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for Sub in Subs %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ Sub.nombre }}</div>
+        <div class="col-2">{{ Sub.tamanio }}</div>
+        <div class="col-2 align-items-center">{{ Sub.precio }} $</div>
+        <div class="col-3"><a type="button"  href="{% url 'add' Sub.categoria.nombre Sub.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Pasta">Pasta</h3>
+  <div class="card translucid food">
+    <img src="/static/Pasta.jpeg" id="Pasta" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/Pasta.jpeg" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Pasta</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for Pasta in Pastas %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ Pasta.nombre }}</div>
+        <div class="col-2 align-items-center">{{ Pasta.precio }} $</div>
+        <div class="col-3"><a type="button"  href="{% url 'add' Pasta.categoria.nombre Pasta.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Ensalada">Ensalada</h3>
+  <div class="card translucid food">
+    <img src="/static/Ensalada.jpg" id="Ensalada" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/Ensalada.jpg" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Ensalada</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for Ensalada in Ensaladas %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ Ensalada.nombre }}</div>
+        <div class="col-2 align-items-center">{{ Ensalada.precio }} $</div>
+        <div class="col-3"><a type="button"  href="{% url 'add' Ensalada.categoria.nombre Ensalada.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
 
-  <div class="card m-3">
-    <h3 class="card-header text-center" id="Platillos_de_cena">Platillos de cena</h3>
+  <div class="card translucid food">
+    <img src="/static/Cena.webp" id="Platillos_de_cena" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <div class="card mb-3">
-        <div class="image">
-        <img src="/static/Cena.webp" class="card-img-top rounded" alt="...">
-      </div>
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      <h2 class="card-title my-2">Dinner Platters</h2>
+      <div class="container text-center tabla">
+        <div class="row">
+          <div class="col-3">Nombre</div>
+          <div class="col-2">Tamaño</div>
+          <div class="col-2">Precio</div>
+          <div class="col-3"></div>
         </div>
+    {% for cena in Cenas %}
+      <div class="row d-flex align-items-center my-3">
+        <div class="col-3 ">{{ cena.nombre }}</div>
+        <div class="col-2">{{ cena.tamanio }}</div>
+        <div class="col-2 align-items-center">{{ cena.precio }} $</div>
+        <div class="col-3"><a type="button"  href="{% url 'add' cena.categoria.nombre cena.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
       </div>
+    {% endfor %}
+  </div>
     </div>
   </div>
-</div>
 
-<button type="button" id="BackTop" class="toTop-arrow" style="z-index: 100;"></button>
+<button type="button" id="BackTop" class="toTop-arrow btn btn-primary" style="z-index: 100;"><i class="fas fa-chevron-up fa-2x"></i></button>
 
 <script>
     // Functions scrolling upwards

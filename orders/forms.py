@@ -4,6 +4,7 @@ from  django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import fields
 from django.forms.widgets import PasswordInput,TextInput,TextInput
+# from bootstrap_modal_forms.forms import BSModalModelForm
 
 class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'class':'form-control',"placeholder":"John"}))

@@ -368,26 +368,6 @@ label{
   display: none;
 }
 
-/* Draw the up arrow in the button*/
-.toTop-arrow::before, .toTop-arrow::after {
-  width: 25px;
-  height: 5px;
-  border-radius: 4px;
-  background: orange;
-  position: absolute;
-  content: "";
-}
-
-.toTop-arrow::before {
-  transform: rotate(-45deg) translate(0, -55%);
-  left: 0.6rem;
-}
-
-.toTop-arrow::after {
-  transform: rotate(45deg) translate(0, -55%);
-  right: 0.6rem;
-}
-
 /* Unfocus when clicking a button*/
 .toTop-arrow:focus {
   outline: none;
@@ -410,15 +390,71 @@ label{
   margin:auto;
 }
 
+.row-height {
+  text-align:right;
+}
+
+
+.translucid{
+  background-color: rgba(0, 0, 0, .8);
+  color: #fff;
+}
+
 .UserName{
   font-weight: 10px;
 }
 
+.food{
+  min-width: 45vw;
+  max-width: 70vw;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom: 10vh;
+}
+
+.tabla{
+  margin-right: 5vw;
+  margin-left:5vw
+}
 
 
-/* Para split */
-/* background: rgb(129,10,233);
-background: -moz-radial-gradient(circle, rgba(129,10,233,1) 0%, rgba(129,18,221,1) 12%, rgba(129,28,204,1) 26%, rgba(116,25,184,1) 45%, rgba(99,22,157,1) 59%, rgba(81,23,125,1) 71%, rgba(73,24,111,1) 79%, rgba(59,20,89,1) 86%, rgba(34,19,46,1) 93%, rgba(10,6,14,1) 99%, rgba(0,0,0,1) 100%);
-background: -webkit-radial-gradient(circle, rgba(129,10,233,1) 0%, rgba(129,18,221,1) 12%, rgba(129,28,204,1) 26%, rgba(116,25,184,1) 45%, rgba(99,22,157,1) 59%, rgba(81,23,125,1) 71%, rgba(73,24,111,1) 79%, rgba(59,20,89,1) 86%, rgba(34,19,46,1) 93%, rgba(10,6,14,1) 99%, rgba(0,0,0,1) 100%);
-background: radial-gradient(circle, rgba(129,10,233,1) 0%, rgba(129,18,221,1) 12%, rgba(129,28,204,1) 26%, rgba(116,25,184,1) 45%, rgba(99,22,157,1) 59%, rgba(81,23,125,1) 71%, rgba(73,24,111,1) 79%, rgba(59,20,89,1) 86%, rgba(34,19,46,1) 93%, rgba(10,6,14,1) 99%, rgba(0,0,0,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#810ae9",endColorstr="#000000",GradientType=1); */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 400px){
+  html{
+    font-size: 30%;
+  }
+}
+
+@media only screen and (min-width: 400px){
+  html{
+    font-size: 55%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  html{
+    font-size: 65%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  html{
+    font-size: 75%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  html{
+    font-size: 80%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  html{
+    font-size: 100%;
+  }
+}

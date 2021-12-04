@@ -1,0 +1,13 @@
+categoria,nombre,uid,precio,tamanio
+9,Garden Salad,71,40,Pequenio
+9,Greek Salad,72,50,Pequenio
+9,Antipasto,73,50,Pequenio
+9,Baked Ziti,74,40,Pequenio
+9,Meatball Parm,75,50,Pequenio
+9,Chicken Parm,76,55,Pequenio
+9,Garden Salad,77,65,Grande
+9,Greek Salad,78,75,Grande
+9,Antipasto,79,75,Grande
+9,Baked Ziti,80,65,Grande
+9,Meatball Parm,81,75,Grande
+9,Chicken Parm,82,85,Grande
