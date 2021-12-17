@@ -17,3 +17,6 @@ user: Admin
 password: Password
 
 una vez inicies sesion tienes acceso al menu de pinochios pizza y sub en el cual puedes seleccionar un item del menu y pedir ese producto,las pizzas poseen toppings, la pizza especial es la unica pizza que posee 6 toppings, los subs tienen 4 extras disponibles para el cliente, cuando tienes items en tu carrito puedes realizar una orden, se te envia un mail de confirmacion de tu orde al correo que seleccionaste y el admin tendra la opcion de ver tu pedido y cambiar su estado a en proceso o enviado,una vez este enviado el usuario podra marcar la orden como recibida, como de costumbre cada que cambia el estado de la orden se le envia un correo al usuario sobre el estado de su orden y una vez recibida se le agradece por preferirnos
+
+
+adicionalmente se hace uso de Import-export django para poder importar los items de el menu de manera facil y rapida
