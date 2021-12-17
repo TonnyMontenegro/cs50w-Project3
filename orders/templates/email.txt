@@ -1,0 +1,15 @@
+
+Hola estimad@ {{orden.usuario.first_name}} {{orden.usuario.last_name}} es de nuestro agrado confirmarte que tu orden #20{{orden.pk}}0f se encuentra en {{orden.estado}}.
+
+aca tienes los detalles de tu orden:
+
+{% for item in items %}
+{{item.elemento.categoria.nombre}}
+{{item.elemento.nombre}} {%if item.tipo_pizza %}{{item.tipo_pizza}}{%endif%}
+{% if item.elemento.tamanio == 'Pequenio' %} Pequeño {% elif item.elemento.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}
+{%for topping in item.toppingPizza.all %}{{topping.nombre}}, {%endfor%}{%for extra in item.extras_name.all %}{{extra.nombre}}, {%endfor%}
+{{item.precio}}
+
+{% endfor %}
+
+               Monto Total = {{orden.monto|floatformat:"2"}}

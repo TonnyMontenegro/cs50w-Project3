@@ -1,5 +1,5 @@
 categoria,nombre,uid,precio,tamanio
-8,+ Mushrooms,60,0.5,Tamanio_unico
-8,+ Green Peppers,61,0.5,Tamanio_unico
-8,+ Onions,62,0.5,Tamanio_unico
-8,Extra Cheese on any sub,63,0.5,Tamanio_unico
+1,Mushrooms,1,0.5,Tamanio_unico
+1,Green Peppers,2,0.5,Tamanio_unico
+1,Onions,3,0.5,Tamanio_unico
+1,Extra Cheese on any sub,4,0.5,Tamanio_unico

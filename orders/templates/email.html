@@ -1,0 +1,43 @@
+<h2>Hola estimad@ {{orden.usuario.first_name}} {{orden.usuario.last_name}} es de nuestro agrado confirmarte que tu orden #20{{orden.pk}}0f se encuentra {{orden.estado}}.</h2>
+
+    <h3>aca tienes los detalles de tu orden:</h2>
+
+<table cellpadding="2" cellspacing="3" align="left" border="1">
+    <thead>
+      <tr>
+    <th>Categoria</th>
+    <th>Item</th>
+    <th>Tamaño</th>
+    <th>Toppings/Extras</th>
+    <th>Precio</th>
+  </tr>
+    </thead>
+<tbody>
+{% for item in items %}
+<tr>
+<th>{{item.elemento.categoria.nombre}}</th>
+<th>{{item.elemento.nombre}} {%if item.tipo_pizza %}{{item.tipo_pizza}}{%endif%}</th>
+<th>{% if item.elemento.tamanio == 'Pequenio' %} Pequeño {% elif item.elemento.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</th>
+<th>{%for topping in item.toppingPizza.all %}{{topping.nombre}}, {%endfor%}{%for extra in item.extras_name.all %}{{extra.nombre}}, {%endfor%}</th>
+<th>{{item.precio}} $</th>
+</tr>
+
+{% endfor %}
+
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th>Total = </th>
+<th>{{orden.monto|floatformat:"2"}} $</th>
+</tr>
+  </tbody>
+  </table>

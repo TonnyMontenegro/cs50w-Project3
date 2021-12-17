@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "98e6f06fa8648a732e75f9537d4a69357f0ff89968a37c70167e5b619ec62f83"
+            "sha256": "aed528babb29e862cb092352edac4a862eaf23b18e5228f920c7c79471e07c88"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -49,6 +49,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.9"
+        },
+        "django-environ": {
+            "hashes": [
+                "sha256:42593bee519a527602a467c7b682aee1a051c2597f98c45f4f4f44169ecdb6e5",
+                "sha256:6f0bc902b43891656b20486938cba0861dc62892784a44919170719572a534cb"
+            ],
+            "index": "pypi",
+            "version": "==0.8.1"
         },
         "django-import-export": {
             "hashes": [
@@ -161,7 +169,6 @@
             "version": "==0.4.2"
         },
         "tablib": {
-            "extras": [],
             "hashes": [
                 "sha256:26141c9cf2d5904a2228d3f5d45f8a46a3f3f2f0fbb4c33b4a1c1ddca9f31348",
                 "sha256:d64c9f6712918a3d90ec5d71b44b8bab1083e3609e4844ad2be80eb633e097ed"

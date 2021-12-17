@@ -1,20 +1,20 @@
-elemento_ptr,categoria,nombre,precio,tamanio
-38,13,Pepperoni,0,Tamanio_unico
-39,13,Sausage,0,Tamanio_unico
-40,13,Mushrooms,0,Tamanio_unico
-41,13,Onions,0,Tamanio_unico
-42,13,Ham,0,Tamanio_unico
-43,13,Canadian Bacon,0,Tamanio_unico
-44,13,Pineapple,0,Tamanio_unico
-45,13,Eggplant,0,Tamanio_unico
-46,13,Tomato & Basil,0,Tamanio_unico
-47,13,Green Peppers,0,Tamanio_unico
-48,13,Hamburger,0,Tamanio_unico
-49,13,Spinach,0,Tamanio_unico
-50,13,Artichoke,0,Tamanio_unico
-51,13,Buffalo Chicken,0,Tamanio_unico
-52,13,Barbecue Chicken,0,Tamanio_unico
-53,13,Anchovies,0,Tamanio_unico
-54,13,Black Olives,0,Tamanio_unico
-55,13,Fresh Garlic,0,Tamanio_unico
-56,13,Zucchini,0,Tamanio_unico
+categoria,nombre,uid,precio,tamanio
+6,Pepperoni,601,0,Tamanio_unico
+6,Sausage,602,0,Tamanio_unico
+6,Mushrooms,603,0,Tamanio_unico
+6,Onions,604,0,Tamanio_unico
+6,Ham,605,0,Tamanio_unico
+6,Canadian Bacon,606,0,Tamanio_unico
+6,Pineapple,607,0,Tamanio_unico
+6,Eggplant,608,0,Tamanio_unico
+6,Tomato & Basil,609,0,Tamanio_unico
+6,Green Peppers,610,0,Tamanio_unico
+6,Hamburger,611,0,Tamanio_unico
+6,Spinach,612,0,Tamanio_unico
+6,Artichoke,613,0,Tamanio_unico
+6,Buffalo Chicken,614,0,Tamanio_unico
+6,Barbecue Chicken,615,0,Tamanio_unico
+6,Anchovies,616,0,Tamanio_unico
+6,Black Olives,617,0,Tamanio_unico
+6,Fresh Garlic,618,0,Tamanio_unico
+6,Zucchini,619,0,Tamanio_unico

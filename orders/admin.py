@@ -3,7 +3,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from .models import *
 
-# Importar en el siguiente orden los .CSV
+# Importar .CSV
 class CategoriasResource(resources.ModelResource):
     class Meta:
         model = Categoria
@@ -15,6 +15,12 @@ class CategoriasAdmin(ImportExportModelAdmin):
     search_fields=("nombre",)
     list_filter=("nombre",)
     resource_class = CategoriasResource
+
+class ElementosAdmin(ImportExportModelAdmin):
+    list_display=("uid", "categoria","nombre","precio","tamanio")
+    search_choices=("categoria","precio","tamanio","uid")
+    search_fields=("uid", "nombre","precio")
+    list_filter=("categoria","tamanio")
 
 
 #   Pizzas
@@ -116,7 +122,7 @@ class CenasAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(Categoria,CategoriasAdmin)
-admin.site.register(Elemento)
+admin.site.register(Elemento,ElementosAdmin)
 admin.site.register(sub,SubsAdmin)
 admin.site.register(Pasta,PastasAdmin)
 admin.site.register(Ensalda,EnsaldasAdmin)

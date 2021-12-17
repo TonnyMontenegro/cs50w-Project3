@@ -1,0 +1,5 @@
+Hola de nuevo {{orden.usuario.first_name}} {{orden.usuario.last_name}}.
+
+Te escribimos para informarte que tu orden #20{{orden.pk}}0f se encuentra en {{orden.estado}}.
+
+cuando recibas tu orden puede ir a tu pestaña de ordenes y marcarla como recibida.

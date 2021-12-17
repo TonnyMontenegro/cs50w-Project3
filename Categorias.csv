@@ -1,8 +1,8 @@
-nombre
-Extra
-Cena
-Salad
-Pasta
-Sub
-Topping
-Pizza
+uid,nombre
+7,Pizza
+6,Topping
+5,Sub
+4,Pasta
+3,Salad
+2,Cena
+1,Extra

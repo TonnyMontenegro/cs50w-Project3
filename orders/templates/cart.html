@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block Title %} Carrito {% endblock %}
+
+{% block body %} 
+<div class=" Menu rounded pt-5 pb-1 shadow-lg">
+  <div class="card-body">
+
+          {% if messages %}
+  <div class="row m-2">
+  <div class="col-lg text-center">
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert">
+          <p>{{ message }}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endif %}
+        {% if items %}
+            <table class="table text-light table-dark table-hover">
+                <thead>
+                  <tr>
+                <th>Categoria</th>
+                <th>Item</th>
+                <th>Tamaño</th>
+                <th>Toppings/Extras</th>
+                <th>Precio</th>
+                <th> </th>
+              </tr>
+                </thead>
+            <tbody>
+          {% for item in items %}
+          <tr>
+            <th>{{item.elemento.categoria.nombre}}</th>
+            <th>{{item.elemento.nombre}} {%if item.tipo_pizza %}{{item.tipo_pizza}}{%endif%}</th>
+            <th>{% if item.elemento.tamanio == 'Pequenio' %} Pequeño {% elif item.elemento.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</th>
+            <th>{%for topping in item.toppingPizza.all %}{{topping.nombre}}, {%endfor%}{%for extra in item.extras_name.all %}{{extra.nombre}}, {%endfor%}</th>
+            <th>{{item.precio}} $ {%if item.monto_extras > 0 %}+ {{item.monto_extras}} ${%endif%}</th>
+            <th><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete_{{item.pk}}" ><i class="fas fa-trash-alt fa-lg"></i></button></th>
+          </tr>
+    
+          <div class="modal fade my-5 text-dark text-left pt-5" id="Delete_{{item.pk}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content ">
+                <div class="modal-header">
+                  <h2 class="modal-title text-center" id="ModalName">Eliminar Item<i class="fas fa-eraser fa-lg"></i></h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <h2>{{item.elemento.nombre}} {%if item.tipo_pizza %}{{item.tipo_pizza}}{%endif%}{% if item.elemento.tamanio == 'Pequenio' %} Pequeño {% elif item.elemento.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</h2>
+                  <h3 class="text-center">Esta seguro que desea eliminar esta orden de su cuenta?</h3>
+                <div class="modal-footer">
+                <form action="/delete_item/{{item.pk}}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger" aria-current="page">Si, eliminar <i class="fas fa-trash-alt fa-lg"></i></button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+                </form>
+              </div>
+              </form>
+              </div>
+            </div>
+          </div>
+            </div>
+          
+          {% endfor %}
+          
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Total = </th>
+            <th>{{orden.monto|floatformat:"2"}} $</th>
+            <th>{%if items%}<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#order" >Ordenar <i class="fas fa-file-invoice-dollar fa-lg"></i></button>{%endif%}</th>
+          </tr>
+              </tbody>
+              </table>
+        {%else%}
+          <div class="card translucid food">
+            <div class="card-body text-center">
+              <h2>
+                mmm parece que aun no posees ningun item agregado en tu carrito...
+              </h2>
+              <p>puedes dirigirte al menu y añadir items a tu carrito</p>
+              <a type="button" href="/home" class="btn btn-success text-center">Ver el menu <i class="far fa-list-alt fa-x2"></i></a>
+            </div>
+          </div>
+        {%endif%}
+              
+
+</div>
+</div>
+
+<div class="modal fade my-5 text-dark text-left pt-5" id="order" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h2 class="modal-title text-center" id="ModalName">Confirmar orden <i class="fas fa-file-invoice-dollar fa-lg"></i></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center">Esta seguro que desea ordenar todos los items de su carrito?</h3>
+      <div class="modal-footer">
+      <form action="/make_order/{{orden.pk}}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" aria-current="page">Si, Ordenar <i class="fas fa-file-invoice-dollar"></i></button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+      </form>
+    </div>
+    </form>
+    </div>
+  </div>
+</div>
+  </div>
+{% endblock %}
+
+
+

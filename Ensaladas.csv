@@ -1,5 +1,5 @@
 categoria,nombre,uid,precio,tamanio
-10,Garden Salad,67,7.5,Tamanio_unico
-10,Greek Salad,68,8.95,Tamanio_unico
-10,Antipasto,69,9.75,Tamanio_unico
-10,Salad w/Tuna,70,9.75,Tamanio_unico
+3,Garden Salad,301,7.5,Tamanio_unico
+3,Greek Salad,302,8.95,Tamanio_unico
+3,Antipasto,303,9.75,Tamanio_unico
+3,Salad w/Tuna,304,9.75,Tamanio_unico

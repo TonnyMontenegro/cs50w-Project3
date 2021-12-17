@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block Title %} Ordenes {% endblock %}
+
+{% block body %} 
+<div class=" Menu rounded pt-5 pb-1 shadow-lg">
+        <div class="card-body">
+
+          {% if messages %}
+  <div class="row m-2">
+  <div class="col-lg text-center">
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert">
+          <p>{{ message }}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endif %}
+    {% if ordenes or ordenesAdmin %}
+            <table class="table text-light table-dark table-hover">
+                <thead>
+                  <tr>
+                <th>ID</th>
+                <th>Correo</th>
+                <th>Nombres</th>
+                <th>Fecha</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th> </th>
+              </tr>
+                </thead>
+            <tbody>
+          {% if user.is_staff %}
+            {% for orden in ordenesAdmin %}
+          <tr>
+            <th><a href="/order/{{orden.pk}}">#20{{orden.pk}}0f</a></th>
+                <th>{{orden.usuario.email}}</th>
+                <th>{{orden.usuario.first_name}} {{orden.usuario.last_name}}</th>
+                <th>{{orden.fecha}}</th>
+                <th>{{orden.monto}} $</th>
+                <th style="{%if orden.estado == 'Recibida'%} color:lightgreen{%elif orden.estado == 'Enviada' %} color:lightblue {%endif%}">{{orden.estado}}</th>
+                <th>
+                {% if orden.estado != 'Recibida'%}
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <form action="/state_change/en_proceso/{{orden.pk}}" method="post">{%csrf_token%}<button type="submit" class="btn btn-danger btn-sm">En proceso</button></form>
+                  <form action="/state_change/enviada/{{orden.pk}}" method="post">{%csrf_token%}<button type="submit" class="btn btn-primary btn-sm">Enviada</button></form>
+                </div>
+                {%else%}
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <form action="/state_change/en_proceso/{{orden.pk}}" method="post">{%csrf_token%}<button type="submit" class="btn btn-danger btn-sm disabled">En proceso</button></form>
+                  <form action="/state_change/enviada/{{orden.pk}}" method="post">{%csrf_token%}<button type="submit" class="btn btn-primary btn-sm disabled">Enviada</button></form>
+                </div>
+                {%endif%}
+              </th>
+          </tr>
+          
+          {% endfor %}
+          {% else %}
+            {% for orden in ordenes %}
+            <tr>
+              <th><a href="/order/{{orden.pk}}">#20{{orden.pk}}0f</a></th>
+                  <th>{{orden.usuario.email}}</th>
+                  <th>{{orden.usuario.first_name}} {{orden.usuario.last_name}}</th>
+                  <th>{{orden.fecha}}</th>
+                  <th>{{orden.monto}} $</th>
+                  <th style="{%if orden.estado == 'Recibida'%} color:lightgreen{%elif orden.estado == 'Enviada' %} color:lightblue {%endif%}">{{orden.estado}}</th>
+                  <th>{%if orden.estado == 'Enviada'%}<div class="btn-group" role="group" aria-label="Basic example">
+                    <form action="/state_change/recibida/{{orden.pk}}" method="post">{%csrf_token%}<button type="submit" class="btn btn-success btn-sm">Recibida</button></form>
+                  </div>{%endif%}
+                </th>
+            </tr>
+            {% endfor %}
+          {%endif%}
+              </tbody>
+              </table>
+
+    {% else %}
+    <div class="card translucid food">
+      <div class="card-body text-center">
+        <h2>
+          mmm parece que aun no posees ninguna orden...
+        </h2>
+        <p>puedes dirigirte al menu y añadir items a tu carrito para luego ordenar todo lo de tu carrito</p>
+        <a type="button" href="/home" class="btn btn-success text-center">Ver el menu <i class="far fa-list-alt fa-x2"></i></a>
+      </div>
+    </div>
+    {% endif %}
+
+              
+
+</div>
+</div>
+
+{% endblock %}
+
+
+

@@ -1,8 +1,10 @@
 from django.db import models
 from django.db.models.base import Model
 from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
 from django.db.models.fields.related import RelatedField
 from django.utils import timezone
+from django.views import defaults
 
 # Create your models here.
 
@@ -127,35 +129,42 @@ class CarritoItem(models.Model):
     # Carrito del usuario
     usuario = models.ForeignKey(User,on_delete=models.CASCADE,)
     elemento = models.ForeignKey(Elemento,on_delete=models.CASCADE)
-    topping = models.ManyToManyField(Topping,blank=True,related_name="toppings_carrito")
-    extra_name = models.ManyToManyField(Extra,blank=True,related_name="extra_carrito")
-    cantidad = models.IntegerField(default=1)
+    toppingPizza = models.ManyToManyField(Topping,blank=True,related_name="toppings_carrito")
+    tipo_pizza = models.CharField(blank=True,null=True,max_length=20)
+    extras_name = models.ManyToManyField(Extra,blank=True,related_name="extras_carrito")
     uid_item_cart= models.AutoField(primary_key=True)
+    orden = models.ForeignKey("orden",on_delete=models.CASCADE,null=True,blank=True)
     precio = models.DecimalField(default=1,decimal_places=2,max_digits=6)
+    monto_extras = models.DecimalField(default=0,decimal_places=2,max_digits=6)
     def __str__(self):
-        return f"#{self.uid_item_cart} {self.usuario}({self.elemento} {self.cantidad}): ${self.precio}"
+        return f"#{self.uid_item_cart} {self.usuario}({self.elemento}): ${self.precio}"
     def __valido__(self):
-        return (self.precio > 0) 
+        return (self.precio > 0)
 
 class orden(models.Model):
     id_orden= models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(User,on_delete=models.CASCADE,)
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     monto= models.DecimalField(default=1,blank=True,decimal_places=2,max_digits=16)
     items=models.ManyToManyField(CarritoItem,related_name="items_orden")
+
     En_proceso = "En proceso"
     Enviada = "Enviada"
     Recibida = "Recibida"
+
     Carrito="Carrito"
     Orden="Orden"
     Choices_state=(
-        (Carrito,"Carrito"),
         (En_proceso,"En proceso"),
         (Enviada,"Enviada"),
         (Recibida,"Recibida"),
+    )
+    Choices_type=(
+        (Carrito,"Carrito"),
         (Orden,"Orden")
     )
-    estado = models.CharField(default=Carrito, max_length=20,choices=Choices_state)
+    estado = models.CharField(default=En_proceso, max_length=20,choices=Choices_state)
+    tipo = models.CharField(default=Carrito,max_length=20,choices=Choices_type)
 
     def __str__(self):
         return f"#{self.id_orden} {self.fecha} {self.usuario}: ${self.monto} ({self.estado})"

@@ -1,30 +1,30 @@
 categoria,nombre,uid,precio,tamanio
-12,Cheese,59,7.75,Pequenio
-12,Italian,58,7.75,Pequenio
-12,Ham + Cheese,57,7.75,Pequenio
-12,Meatball,56,7.75,Pequenio
-12,Tuna,55,7.75,Pequenio
-12,Turkey,54,8.75,Pequenio
-12,Chicken Parmigiana,53,8.75,Pequenio
-12,Eggplant Parmigiana,52,7.75,Pequenio
-12,Steak,51,8,Pequenio
-12,Steak + Cheese,50,8.75,Pequenio
-12,Cheese,49,9.5,Grande
-12,Italian,48,9.5,Grande
-12,Ham + Cheese,47,9.5,Grande
-12,Meatball,46,9.5,Grande
-12,Tuna,45,9.5,Grande
-12,Turkey,44,9.95,Grande
-12,Chicken Parmigiana,43,9.95,Grande
-12,Eggplant Parmigiana,42,9.5,Grande
-12,Steak,41,10.1,Grande
-12,Steak + Cheese,40,10.85,Grande
-12,"Sausage, Peppers & Onions",39,9.95,Tamanio_unico
-12,Hamburger,38,6.95,Pequenio
-12,Cheeseburger,37,7.75,Pequenio
-12,Fried Chicken,36,8.5,Pequenio
-12,Veggie,35,8.5,Pequenio
-12,Hamburger,34,8.75,Grande
-12,Cheeseburger,33,9.5,Grande
-12,Fried Chicken,32,9.95,Grande
-12,Veggie,31,9.95,Grande
+5,Cheese,501,7.75,Pequenio
+5,Italian,502,7.75,Pequenio
+5,Ham + Cheese,503,7.75,Pequenio
+5,Meatball,504,7.75,Pequenio
+5,Tuna,505,7.75,Pequenio
+5,Turkey,506,8.75,Pequenio
+5,Chicken Parmigiana,507,8.75,Pequenio
+5,Eggplant Parmigiana,508,7.75,Pequenio
+5,Steak,509,8,Pequenio
+5,Steak + Cheese,510,8.75,Pequenio
+5,Cheese,511,9.5,Grande
+5,Italian,512,9.5,Grande
+5,Ham + Cheese,513,9.5,Grande
+5,Meatball,514,9.5,Grande
+5,Tuna,515,9.5,Grande
+5,Turkey,516,9.95,Grande
+5,Chicken Parmigiana,517,9.95,Grande
+5,Eggplant Parmigiana,518,9.5,Grande
+5,Steak,519,10.1,Grande
+5,Steak + Cheese,520,10.85,Grande
+5,"Sausage, Peppers & Onions",521,9.95,Tamanio_unico
+5,Hamburger,522,6.95,Pequenio
+5,Cheeseburger,523,7.75,Pequenio
+5,Fried Chicken,524,8.5,Pequenio
+5,Veggie,525,8.5,Pequenio
+5,Hamburger,526,8.75,Grande
+5,Cheeseburger,527,9.5,Grande
+5,Fried Chicken,528,9.95,Grande
+5,Veggie,529,9.95,Grande

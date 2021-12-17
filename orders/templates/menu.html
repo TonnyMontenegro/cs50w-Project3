@@ -4,157 +4,375 @@
 {% load static %}
 <div class="container Menu rounded py-5 shadow-lg">
 
+  {% if messages %}
+  <div class="row m-2">
+  <div class="col-lg text-center">
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert">
+          <p>{{ message }}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endif %}
+
+
 
   <div class="card translucid food">
     <img src="/static/RegularPizza.webp" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Pizza Regular</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Tamaño</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover centerX">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th >Tamaño</th>
+            <th >Precio</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
     {% for pizza in RegularPizzas %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ pizza.tipo }} {{ pizza.nombre }}</div>
-        <div class="col-2">{{ pizza.tamanio }}</div>
-        <div class="col-2 align-items-center">{{ pizza.precio }} $</div>
-        <div class="col-3"><a type="button" href="{% url 'add' pizza.categoria.nombre pizza.uid %}" class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+    <tr>
+        <th>{{ pizza.nombre }}</th>
+        <th>{% if pizza.tamanio == 'Pequenio' %} Pequeña {% elif pizza.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</th>
+        <th >{{ pizza.precio }} $</th>
+        <th><a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Addcart_{{pizza.uid}}">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+      
+      <!-- Modal add to cart -->
+      <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{pizza.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ pizza.tipo }} {{ pizza.nombre }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalTamanio">Tamaño:{% if pizza.tamanio == 'Pequenio' %} Pequeño {% elif pizza.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</h2>
+              {% if pizza.toppingN > 0 %} <h2 class="modal-title text-center" id="ModalTipo">Cantidad de Toppings:{{pizza.toppingN}}</h2>{%endif%}
+              <h2 class="modal-title text-center" id="ModalPrecio">Precio: {{pizza.precio}}$</h2>
+              <form action="/add/{{pizza.uid}}/{{pizza.categoria.nombre}}/" method="POST">
+                {% csrf_token %}
+              <div id="ModalToppings">
+                {% if pizza.toppingN > 0 %}
+                  {% for n in 0|rjust:pizza.toppingN %}
+                  <select class="form-select form-select-lg my-2" name="Toppings" aria-label="Default select example">
+                    {% for topping in Toppings %}
+                    <option value="{{ topping.uid }}" >{{ topping.nombre }}</option>
+                    {% endfor %}
+                  </select>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+          </div>
+          </div>
+        </div>
       </div>
+      
     {% endfor %}
+  </tbody>
+  </table>
   </div>
     </div>
-  </div>
 
   <div class="card translucid food">
     <img src="/static/SicilianPizza.jpg" id="Sicilian_pizza" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Pizza Sicilian</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Tamaño</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+            <tr>
+          <th  >Nombre</th>
+          <th  >Tamaño</th>
+          <th  >Precio</th>
+          <th  ></th>
+            </tr>
+      </thead>
+      <tbody>
     {% for pizza in SicilianPizzas %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ pizza.tipo }} {{ pizza.nombre }}</div>
-        <div class="col-2">{{ pizza.tamanio }}</div>
-        <div class="col-2 align-items-center">{{ pizza.precio }} $</div>
-        <div class="col-3"><a type="button"  href="{% url 'add' pizza.categoria.nombre pizza.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+      <tr>
+        <th  >{{ pizza.nombre }}</th>
+        <th  >{% if pizza.tamanio == 'Pequenio' %} Pequeña {% elif pizza.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</th>
+        <th  >{{ pizza.precio }} $</th>
+        <th  ><a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Addcart_{{pizza.uid}}">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+
+       <!-- Modal add to cart -->
+       <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{pizza.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ pizza.tipo }} {{ pizza.nombre }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalTamanio">Tamaño:{% if pizza.tamanio == 'Pequenio' %} Pequeño {% elif pizza.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</h2>
+              {% if pizza.toppingN > 0 %} <h2 class="modal-title text-center" id="ModalTipo">Cantidad de Toppings:{{pizza.toppingN}}</h2>{%endif%}
+              <h2 class="modal-title text-center" id="ModalPrecio">Precio: {{pizza.precio}}$</h2>
+              <form action="/add/{{pizza.uid}}/{{pizza.categoria.nombre}}/" method="POST">
+                {% csrf_token %}
+              <div id="ModalToppings">
+                {% if pizza.toppingN > 0 %}
+                  {% for n in 0|rjust:pizza.toppingN %}
+                  <select class="form-select form-select-lg my-2"  name="Toppings" aria-label="Default select example">
+                    {% for topping in Toppings %}
+                    <option value="{{ topping.uid }}" >{{ topping.nombre }}</option>
+                    {% endfor %}
+                  </select>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></a>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+          </div>
+          </div>
+        </div>
       </div>
+    
     {% endfor %}
+  </tbody>
+  </table>
   </div>
     </div>
-  </div>
 
   <div class="card translucid food">
     <img src="/static/Toppings.jpg" id="Toppings" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
-      <h2 class="card-title my-2">Toppings/extras</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-        </div>
+      <h2 class="card-title my-2">Toppings</h2>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+            <tr>
+          <th  >Nombre</th>
+            </tr>
+          </thead>
+            <tbody>
     {% for Topping in Toppings %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ Topping.nombre }}</div>
-      </div>
+      <tr>
+        <th  >{{ Topping.nombre }}</th>
+      </tr>
+    
     {% endfor %}
+  </tbody>
+      </table>
+          
   </div>
     </div>
-  </div>
 
   <div class="card translucid food">
     <img src="/static/Subs.jpg" id="Subs" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Subs</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Tamaño</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+        <tr>
+          <th  >Nombre</th>
+          <th  >Tamaño</th>
+          <th  >Precio</th>
+          <th  ></th>
+        </tr>
+          </thead>
+        <tbody>
     {% for Sub in Subs %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ Sub.nombre }}</div>
-        <div class="col-2">{{ Sub.tamanio }}</div>
-        <div class="col-2 align-items-center">{{ Sub.precio }} $</div>
-        <div class="col-3"><a type="button"  href="{% url 'add' Sub.categoria.nombre Sub.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+
+      <tr>
+        <th  >{{ Sub.nombre }}</th>
+        <th  >{% if Sub.tamanio == 'Pequenio' %} Pequeño {% elif Sub.tamanio == 'Tamanio_unico' %}Estandar{% else %} Grande {%endif%}</th>
+        <th  >{{ Sub.precio }} $</th>
+        <th  ><a type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#Addcart_{{Sub.uid}}">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+
+       <!-- Modal add to cart -->
+       <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{Sub.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ Sub.nombre }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalTamanio">Tamaño:{% if Sub.tamanio == 'Pequenio' %} Pequeño {% elif Sub.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</h2>
+              <h2 class="modal-title text-center" id="ModalPrecio" value="{{sub.precio}}">Precio: {{Sub.precio}}$</h2>
+              <h2 class="modal-title text-center" id="ModalTipo">Extras:</h2>
+              <form action="/add/{{Sub.uid}}/{{Sub.categoria.nombre}}/" method="POST">
+                {% csrf_token %}
+              <div id="ModalExtras">
+                {% for extra in Extras %}
+                <div class="form-check">
+                  <input class="form-check-input Extras" type="checkbox" name="Extras" value="{{extra.uid}}" id="{{extra.nombre}}">
+                  <label class="form-check-label" for="flexCheckDefault">{{extra.nombre}} x {{extra.precio}}$+</label>
+                </div>
+                {% endfor %}
+              </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></a>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+            </div>
+          </div>
+        </div>
       </div>
+    
     {% endfor %}
+  </tbody>
+      </table>
   </div>
     </div>
-  </div>
+
 
   <div class="card translucid food">
     <img src="/static/Pasta.jpeg" id="Pasta" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Pasta</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+        <tr>
+          <th  >Nombre</th>
+          <th  >Precio</th>
+          <th  ></th>
+        </tr>
+          </thead>
+        <tbody>
     {% for Pasta in Pastas %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ Pasta.nombre }}</div>
-        <div class="col-2 align-items-center">{{ Pasta.precio }} $</div>
-        <div class="col-3"><a type="button"  href="{% url 'add' Pasta.categoria.nombre Pasta.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+    
+      <tr>
+        <th  >{{ Pasta.nombre }}</th>
+        <th  >{{ Pasta.precio }} $</th>
+        <th  ><a type="button"  data-bs-toggle="modal" data-bs-target="#Addcart_{{Pasta.uid}}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+
+      <!-- Modal add to cart -->
+      <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{Pasta.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ Pasta.nombre }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalPrecio">Precio: {{Pasta.precio}}$</h2>
+              <form action="/add/{{Pasta.uid}}/{{Pasta.categoria.nombre}}/" method="POST">
+                {% csrf_token %}  
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></a>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+          </div>
+          </div>
+        </div>
       </div>
     {% endfor %}
+  </tbody>
+      </table>
   </div>
     </div>
-  </div>
 
   <div class="card translucid food">
     <img src="/static/Ensalada.jpg" id="Ensalada" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Ensalada</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+            <tr>
+          <th  >Nombre</th>
+          <th  >Precio</th>
+          <th  ></th>
+        </tr>
+          </thead>
+        <tbody>
     {% for Ensalada in Ensaladas %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ Ensalada.nombre }}</div>
-        <div class="col-2 align-items-center">{{ Ensalada.precio }} $</div>
-        <div class="col-3"><a type="button"  href="{% url 'add' Ensalada.categoria.nombre Ensalada.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+ 
+      <tr>
+        <th  >{{ Ensalada.nombre }}</th>
+        <th  >{{ Ensalada.precio }} $</th>
+        <th  ><a type="button" data-bs-toggle="modal" data-bs-target="#Addcart_{{Ensalada.uid}}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+
+      <!-- Modal add to cart -->
+      <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{Ensalada.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ Ensalada.nombre }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalPrecio">Precio: {{Ensalada.precio}}$</h2>
+              <form action="/add/{{Ensalada.uid}}/{{Ensalada.categoria.nombre}}/" method="POST">
+                {% csrf_token %}  
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></a>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+          </div>
+          </div>
+        </div>
       </div>
+    
     {% endfor %}
+  </tbody>
+      </table>
   </div>
     </div>
-  </div>
 
   <div class="card translucid food">
     <img src="/static/Cena.webp" id="Platillos_de_cena" class="card-img-top rounded" alt="..." id="Regular_pizza">
     <div class="card-body">
       <h2 class="card-title my-2">Dinner Platters</h2>
-      <div class="container text-center tabla">
-        <div class="row">
-          <div class="col-3">Nombre</div>
-          <div class="col-2">Tamaño</div>
-          <div class="col-2">Precio</div>
-          <div class="col-3"></div>
-        </div>
+      <table class="table text-light table-dark table-hover">
+          <thead>
+            <tr>
+          <th  >Nombre</th>
+          <th  >Tamaño</th>
+          <th  >Precio</th>
+          <th  ></th>
+        </tr>
+          </thead>
+      <tbody>
     {% for cena in Cenas %}
-      <div class="row d-flex align-items-center my-3">
-        <div class="col-3 ">{{ cena.nombre }}</div>
-        <div class="col-2">{{ cena.tamanio }}</div>
-        <div class="col-2 align-items-center">{{ cena.precio }} $</div>
-        <div class="col-3"><a type="button"  href="{% url 'add' cena.categoria.nombre cena.uid %}"  class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></div>
+    
+      <tr>
+        <th  >{{ cena.nombre }}</th>
+        <th  >{% if cena.tamanio == 'Pequenio' %} Pequeño {% elif cena.tamanio == 'Tamanio_unico' %}Estandar{% else %} Grande {%endif%}</th>
+        <th  >{{ cena.precio }} $</th>
+        <th  ><a type="button" data-bs-toggle="modal" data-bs-target="#Addcart_{{cena.uid}}" class="btn btn-primary btn-sm">Añadir al carrito <i class="fas fa-cart-plus fa-lg"></i></a></th>
+      </tr>
+    
+      <!-- Modal add to cart -->
+      <div class="modal fade my-5 text-dark text-left pt-5" id="Addcart_{{cena.uid}}" tabindex="1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content ">
+            <div class="modal-header">
+              <h2 class="modal-title text-center" id="ModalName">{{ cena.nombre }} {{ cena.tamanio }}</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h2 class="modal-title text-center" id="ModalPrecio">Precio: {{cena.precio}}$</h2>
+              <form action="/add/{{cena.uid}}/{{cena.categoria.nombre}}/" method="POST">
+                {% csrf_token %}  
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" aria-current="page">Agregar al carrito <i class="fas fa-cart-plus fa-lg"></i></a>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar <i class="fas fa-ban fa-lg"></i></button>
+            </form>
+          </div>
+          </div>
+        </div>
       </div>
     {% endfor %}
+  </tbody>
   </div>
     </div>
-  </div>
+
 
 <button type="button" id="BackTop" class="toTop-arrow btn btn-primary" style="z-index: 100;"><i class="fas fa-chevron-up fa-2x"></i></button>
 
@@ -172,5 +390,15 @@
             }
         }).scroll();
     });
+
+    
+    $('.Extras').change(function () {
+        var costetotal = ModalPrecio;
+        var precio = parseInt(this.value);
+        costetotalN += this.checked ? precio : -precio;
+        alert(precio)
+        $('.ModalTotal').innerHTML('Precio total con extras: ' + costetotalN + '$');
+    });
+
 </script>
 {% endblock %}
