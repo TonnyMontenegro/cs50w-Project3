@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'phonenumber_field', #extension de numero de telefono
     'import_export', #extension para importar y exportar datos
+    'django_extensions', 
     'orders.apps.OrdersConfig',
     'django.contrib.admin',
     'django.contrib.auth',

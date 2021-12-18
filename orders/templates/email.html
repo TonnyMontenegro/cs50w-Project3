@@ -19,7 +19,7 @@
 <th>{{item.elemento.nombre}} {%if item.tipo_pizza %}{{item.tipo_pizza}}{%endif%}</th>
 <th>{% if item.elemento.tamanio == 'Pequenio' %} Pequeño {% elif item.elemento.tamanio == 'Tamanio_unico' %} {% else %} Grande {%endif%}</th>
 <th>{%for topping in item.toppingPizza.all %}{{topping.nombre}}, {%endfor%}{%for extra in item.extras_name.all %}{{extra.nombre}}, {%endfor%}</th>
-<th>{{item.precio}} $</th>
+<th>{{item.precio}} $ {%if item.monto_extras > 0 %}+ {{item.monto_extras}} ${%endif%}</th>
 </tr>
 
 {% endfor %}
